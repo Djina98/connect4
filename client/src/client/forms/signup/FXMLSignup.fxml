@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="428.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.signup.FXMLSignupController">
    <children>
-      <Label fx:id="lblNickname" layoutX="140.0" layoutY="78.0" prefHeight="17.0" prefWidth="149.0" text="Nickname:" />
-      <TextField fx:id="txtNickname" layoutX="140.0" layoutY="95.0" />
-      <Label fx:id="lblPassword" layoutX="140.0" layoutY="146.0" prefHeight="17.0" prefWidth="149.0" text="Password:" />
-      <PasswordField fx:id="txtPassword" layoutX="140.0" layoutY="163.0" />
-      <Label fx:id="lblRePassword" layoutX="140.0" layoutY="216.0" prefHeight="17.0" prefWidth="149.0" text="Repeat password:" />
-      <PasswordField fx:id="txtRePassword" layoutX="140.0" layoutY="233.0" />
+      <Label fx:id="lblNickname" layoutX="140.0" layoutY="43.0" prefHeight="17.0" prefWidth="149.0" text="Nickname:" />
+      <TextField fx:id="txtNickname" layoutX="140.0" layoutY="60.0" />
+      <Label fx:id="lblPassword" layoutX="140.0" layoutY="114.0" prefHeight="17.0" prefWidth="149.0" text="Password:" />
+      <PasswordField fx:id="txtPassword" layoutX="140.0" layoutY="131.0" />
+      <Label fx:id="lblRePassword" layoutX="140.0" layoutY="183.0" prefHeight="17.0" prefWidth="149.0" text="Repeat password:" />
+      <PasswordField fx:id="txtRePassword" layoutX="140.0" layoutY="200.0" />
       <Button fx:id="btnSignup" layoutX="186.0" layoutY="307.0" mnemonicParsing="false" text="Sign up" />
+      <Label fx:id="lblInfo" layoutX="140.0" layoutY="250.0" prefHeight="17.0" prefWidth="149.0" />
    </children>
 </AnchorPane>

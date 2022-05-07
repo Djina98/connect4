@@ -5,19 +5,19 @@
  */
 package client.forms.signup;
 
-import java.awt.TextField;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author Djina
  */
-public class FXMLSignupController {
+public class FXMLSignupController{
     
     @FXML
     public Label lblNickname;
@@ -38,10 +38,15 @@ public class FXMLSignupController {
     public PasswordField txtRePassword;
     
     @FXML
+    public Label lblInfo;
+    
+    @FXML
     public Button btnSignup;
 
+    public GUISignupController guiSignupController;
+    
     @FXML
     public void initialize() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, IOException, FileNotFoundException, ClassNotFoundException {
-        //kngui = new KontrolerGUIKorisnik(this);     
+        guiSignupController = new GUISignupController(this);      
     }    
 }
