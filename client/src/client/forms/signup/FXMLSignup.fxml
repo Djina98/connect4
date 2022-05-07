@@ -14,7 +14,8 @@
       <PasswordField fx:id="txtPassword" layoutX="140.0" layoutY="131.0" />
       <Label fx:id="lblRePassword" layoutX="140.0" layoutY="183.0" prefHeight="17.0" prefWidth="149.0" text="Repeat password:" />
       <PasswordField fx:id="txtRePassword" layoutX="140.0" layoutY="200.0" />
-      <Button fx:id="btnSignup" layoutX="186.0" layoutY="307.0" mnemonicParsing="false" text="Sign up" />
+      <Button fx:id="btnSignup" layoutX="224.0" layoutY="280.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Sign up" />
       <Label fx:id="lblInfo" layoutX="140.0" layoutY="250.0" prefHeight="17.0" prefWidth="149.0" />
+      <Button fx:id="btnLogin" layoutX="119.0" layoutY="280.0" mnemonicParsing="false" text="Back to login" />
    </children>
 </AnchorPane>

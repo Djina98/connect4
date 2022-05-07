@@ -42,5 +42,16 @@ public class Controller {
         }
         throw response.getException();
     }
+    
+    public Player login(String nickaname, String password) throws Exception {
+        Player player = new Player(-1L, nickaname, password);
+        Request request = new Request(RequestOperation.LOGIN, player);
+        socketCommunication.sendRequest(request);
+        Response response = socketCommunication.readResponse();
+        if (response.getStatus() == ResponseStatus.SUCCESS) {
+            return (Player) response.getResult();
+        }
+        throw response.getException();
+    }
 
 }

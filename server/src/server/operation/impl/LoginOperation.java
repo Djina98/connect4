@@ -13,8 +13,8 @@ import server.operation.AbstractGenericOperation;
  *
  * @author Djina
  */
-public class SignupOperation extends AbstractGenericOperation<Player, Player>{
-
+public class LoginOperation extends AbstractGenericOperation<Player, Player>{
+    
     GenericEntity object = null;
     
     @Override
@@ -29,17 +29,17 @@ public class SignupOperation extends AbstractGenericOperation<Player, Player>{
 
     @Override
     protected void executeOperation(Player entity) throws Exception {
-        if(repository.findRecord(new Player(entity.getNickname())) == null) {
-            Player registered = new Player();
-            registered.setId(repository.insertRecord(entity));
-            object = registered;
+        Player  player = (Player) repository.findRecord(new Player(entity.getNickname()));
+        if(player != null) {
+            if(!player.getPassword().equals(entity.getPassword())) {
+                throw new RuntimeException("Bad password!");
+            }
         } else {
-           throw new RuntimeException("Nickname already exists");
+           throw new RuntimeException("Invalid nickname!");
         }
     }
 
     public GenericEntity getObject() {
         return object;
     }
-    
 }

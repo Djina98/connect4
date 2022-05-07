@@ -59,11 +59,25 @@ public class HandleClientRequest extends Thread{
                 switch(request.getOperation()){
                         case SIGNUP:
                             try {
-                                GenericEntity object = Controller.getInstance().findRecord((GenericEntity) request.getData());
+                                GenericEntity object = Controller.getInstance().signup((GenericEntity) request.getData());
                                
                                 response.setResult(object);
                                 response.setStatus(ResponseStatus.SUCCESS);
                                 response.setMessage("Player successfully signed in!");     
+                                ClientSession.getInstance().addPlayer(object);
+                                
+                            } catch (Exception ex) {
+                                Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
+                                response.setException(ex);
+                            }
+                            break;
+                        case LOGIN:
+                            try {
+                                GenericEntity object = Controller.getInstance().login((GenericEntity) request.getData());
+                               
+                                response.setResult(object);
+                                response.setStatus(ResponseStatus.SUCCESS);
+                                response.setMessage("Player successfully logged in!");     
                                 ClientSession.getInstance().addPlayer(object);
                                 
                             } catch (Exception ex) {

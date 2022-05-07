@@ -6,6 +6,9 @@
 package client.forms.signup;
 
 import client.communication.Controller;
+import client.main.GameStage;
+import client.session.Session;
+import common.domain.Player;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -14,30 +17,37 @@ import javafx.scene.control.ButtonType;
  * @author Djina
  */
 public class GUISignupController {
-    FXMLSignupController fXMLSignupController;
+    FXMLSignupController fxmlSignupController;
 
-    public GUISignupController(FXMLSignupController fXMLSignupController) {
-        this.fXMLSignupController = fXMLSignupController;
-        this.fXMLSignupController.btnSignup.setOnAction(event -> onSignup());
+    public GUISignupController(FXMLSignupController fxmlSignupController) {
+        this.fxmlSignupController = fxmlSignupController;
+        this.fxmlSignupController.btnSignup.setOnAction(event -> onSignup());
+        this.fxmlSignupController.btnLogin.setOnAction(event -> onLogin());
     }
     
     private void onSignup() {
-        String nickname = this.fXMLSignupController.txtNickname.getText();
-        String password = this.fXMLSignupController.txtPassword.getText();
-        String rePassword = this.fXMLSignupController.txtRePassword.getText();
+        String nickname = this.fxmlSignupController.txtNickname.getText();
+        String password = this.fxmlSignupController.txtPassword.getText();
+        String rePassword = this.fxmlSignupController.txtRePassword.getText();
             
         if(!password.equals(rePassword)) {
-            this.fXMLSignupController.lblInfo.setText("Password mismatch");
+            this.fxmlSignupController.lblInfo.setText("Password mismatch");
         } else {
             try {
-                Controller.getInstance().signup(nickname, password);
-                //GameStage.getInstance().setScene("forms/login/FXMLLoginPane.fxml");
-                new Alert(Alert.AlertType.INFORMATION, "Success", ButtonType.OK).show();
+                Player player = Controller.getInstance().signup(nickname, password);
+                player.setNickname(nickname);
+                player.setPassword(password);
+                Session.getInstance().setPlayer(player);
+                GameStage.getInstance().setScene("client/forms/home/FXMLHome.fxml");
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
-                this.fXMLSignupController.lblInfo.setText(ex.getMessage());
+                this.fxmlSignupController.lblInfo.setText(ex.getMessage());
             }    
         }     
     }    
+
+    private void onLogin() {
+        GameStage.getInstance().setScene("client/forms/login/FXMLLogin.fxml");
+    }
     
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.forms.signup;
+package client.forms.login;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,8 +17,7 @@ import javafx.scene.control.TextField;
  *
  * @author Djina
  */
-public class FXMLSignupController{
-    
+public class FXMLLoginController {
     @FXML
     public Label lblNickname;
     
@@ -30,26 +29,23 @@ public class FXMLSignupController{
     
     @FXML
     public PasswordField txtPassword;
-    
-    @FXML
-    public Label lblRePassword;
-    
-    @FXML
-    public PasswordField txtRePassword;
-    
+   
     @FXML
     public Label lblInfo;
     
     @FXML
-    public Button btnSignup;
+    public Button btnLogin;
     
     @FXML
-    public Button btnLogin;
+    public Label lblSignup;
+    
+    @FXML
+    public Button btnSignup;
 
-    public GUISignupController guiSignupController;
+    public GUILoginController guiLoginController;
     
     @FXML
     public void initialize() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, IOException, FileNotFoundException, ClassNotFoundException {
-        guiSignupController = new GUISignupController(this);      
+        guiLoginController = new GUILoginController(this);      
     }    
 }

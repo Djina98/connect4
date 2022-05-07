@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import server.dbb.impl.RepositoryDBGeneric;
 import server.operation.AbstractGenericOperation;
+import server.operation.impl.LoginOperation;
 import server.operation.impl.SignupOperation;
 import server.repository.Repository;
 
@@ -32,9 +33,15 @@ public class Controller {
         return instance;
     }
     
-    public GenericEntity findRecord(GenericEntity entity) throws SQLException, Exception {
+    public GenericEntity signup(GenericEntity entity) throws SQLException, Exception {
         AbstractGenericOperation so = new SignupOperation();
         so.execute(entity);
         return ((SignupOperation) so).getObject();
+    }
+    
+    public GenericEntity login(GenericEntity entity) throws SQLException, Exception {
+        AbstractGenericOperation so = new LoginOperation();
+        so.execute(entity);
+        return ((LoginOperation) so).getObject();
     }
 }
