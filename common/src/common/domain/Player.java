@@ -8,6 +8,7 @@ package common.domain;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -52,7 +53,7 @@ public class Player implements GenericEntity{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = DigestUtils.shaHex(password);
     }
 
     @Override

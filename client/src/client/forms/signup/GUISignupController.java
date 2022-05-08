@@ -11,6 +11,7 @@ import client.session.Session;
 import common.domain.Player;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -27,8 +28,8 @@ public class GUISignupController {
     
     private void onSignup() {
         String nickname = this.fxmlSignupController.txtNickname.getText();
-        String password = this.fxmlSignupController.txtPassword.getText();
-        String rePassword = this.fxmlSignupController.txtRePassword.getText();
+        String password = DigestUtils.shaHex(this.fxmlSignupController.txtPassword.getText());
+        String rePassword = DigestUtils.shaHex(this.fxmlSignupController.txtRePassword.getText());
             
         if(!password.equals(rePassword)) {
             this.fxmlSignupController.lblInfo.setText("Password mismatch");

@@ -11,6 +11,7 @@ import client.session.Session;
 import common.domain.Player;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -32,7 +33,7 @@ public class GUILoginController {
     private void onLogin() {
         fxmlLoginController.btnLogin.setOnMouseClicked((event) -> {
             String nickname = fxmlLoginController.txtNickname.getText();
-            String password = fxmlLoginController.txtPassword.getText();
+            String password = DigestUtils.shaHex(fxmlLoginController.txtPassword.getText());
             try {
                 Player player = Controller.getInstance().login(nickname, password);
                 Session.getInstance().setPlayer(player);
