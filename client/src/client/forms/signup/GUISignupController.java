@@ -9,8 +9,6 @@ import client.communication.Controller;
 import client.main.GameStage;
 import client.session.Session;
 import common.domain.Player;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -39,7 +37,7 @@ public class GUISignupController {
                 player.setNickname(nickname);
                 player.setPassword(password);
                 Session.getInstance().setPlayer(player);
-                GameStage.getInstance().setScene("client/forms/home/FXMLHome.fxml");
+                GameStage.getInstance().setScene("client/forms/game/FXMLGame.fxml");
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 this.fxmlSignupController.lblInfo.setText(ex.getMessage());

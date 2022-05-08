@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.forms.home;
+package client.forms.game;
 
 /**
  *
  * @author Djina
  */
-public class FXMLHomeController {
+public class FXMLGameController {
     
 }
