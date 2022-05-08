@@ -6,15 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.login.FXMLLoginController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="428.0" styleClass="background" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.login.FXMLLoginController">
     <children>
-      <Label fx:id="lblNickname" layoutX="140.0" layoutY="43.0" prefHeight="17.0" prefWidth="149.0" text="Nickname:" />
-      <TextField fx:id="txtNickname" layoutX="140.0" layoutY="60.0" />
-      <Label fx:id="lblPassword" layoutX="140.0" layoutY="114.0" prefHeight="17.0" prefWidth="149.0" text="Password:" />
-      <PasswordField fx:id="txtPassword" layoutX="140.0" layoutY="131.0" />
-      <Button fx:id="btnLogin" layoutX="183.0" layoutY="200.0" mnemonicParsing="false" text="Login" />
-      <Label fx:id="lblInfo" layoutX="140.0" layoutY="170.0" prefHeight="17.0" prefWidth="149.0" />
-      <Label fx:id="lblSignup" layoutX="110.0" layoutY="292.0" prefHeight="17.0" prefWidth="193.0" text="Don't have an account yet? Sign up!" />
-      <Button fx:id="btnSignup" layoutX="180.0" layoutY="331.0" mnemonicParsing="false" text="Sign up" />
+      <Label fx:id="lblNickname" layoutX="183.0" layoutY="43.0" prefHeight="17.0" prefWidth="63.0" styleClass="labelNickname" stylesheets="@../css/login.css" text="Nickname:" textFill="WHITE" />
+      <TextField fx:id="txtNickname" layoutX="140.0" layoutY="66.0" />
+      <Label fx:id="lblPassword" layoutX="186.0" layoutY="114.0" prefHeight="17.0" prefWidth="57.0" styleClass="labelPassword" stylesheets="@../css/login.css" text="Password:" textFill="WHITE" />
+      <PasswordField fx:id="txtPassword" layoutX="140.0" layoutY="137.0" />
+      <Button fx:id="btnLogin" layoutX="190.0" layoutY="200.0" mnemonicParsing="false" stylesheets="@../css/login.css" text="Login" />
+      <Label fx:id="lblInfo" layoutX="140.0" layoutY="170.0" prefHeight="17.0" prefWidth="149.0" styleClass="labelInfo" stylesheets="@../css/login.css" textAlignment="CENTER" />
+      <Button fx:id="btnSignup" layoutX="105.0" layoutY="343.0" mnemonicParsing="false" stylesheets="@../css/login.css" text="Don't have an account yet? Sign up!" />
    </children>
 </AnchorPane>

@@ -37,9 +37,6 @@ public class FXMLLoginController {
     public Button btnLogin;
     
     @FXML
-    public Label lblSignup;
-    
-    @FXML
     public Button btnSignup;
 
     public GUILoginController guiLoginController;
