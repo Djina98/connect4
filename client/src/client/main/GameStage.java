@@ -42,7 +42,6 @@ public class GameStage {
     
     public void setScene(String FXMLResourcePath) {
         try {
-            stage.hide();
             stage.setScene(new Scene(FXMLLoader.load(getClass().getClassLoader().getResource(FXMLResourcePath))));
         } catch (IOException ex) {
             throw new RuntimeException(ex);
@@ -52,13 +51,6 @@ public class GameStage {
         }
     }
     
-    public void setScene(Scene scene) {
-        stage.hide();
-        stage.setScene(scene);
-        stage.show();
-        setPosition();
-    }
-
     private void setPosition() {
         Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);

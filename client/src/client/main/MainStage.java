@@ -19,7 +19,6 @@ public class MainStage extends Application{
         stage.setTitle("Connect4");
         stage.setResizable(false);
         GameStage.setStage(stage);
-        stage.show();
         GameStage.getInstance().setScene("client/forms/login/FXMLLogin.fxml");
     }
 
