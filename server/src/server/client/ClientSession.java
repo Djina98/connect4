@@ -39,6 +39,15 @@ public class ClientSession {
     public ArrayList<Player> getPlayers() {
         return players;
     }
+    
+    public int getIndexOfPlayer(Player player){
+        for(int i = 0; i < players.size(); i++){
+            if(players.get(i).getNickname().equals(player.getNickname()))
+                return i;
+        }
+        
+        return -1;
+    }
 
     public void removePlayer(Object object) {
         try {

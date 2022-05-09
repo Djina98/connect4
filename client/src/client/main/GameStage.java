@@ -9,6 +9,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -49,6 +50,12 @@ public class GameStage {
             stage.show();
             setPosition();
         }
+    }
+    
+    public void setScene(Scene scene) {
+        stage.setScene(scene);
+        stage.show();
+        setPosition();
     }
     
     private void setPosition() {

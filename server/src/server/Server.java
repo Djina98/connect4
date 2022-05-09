@@ -14,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import server.dbb.DBBConnectionFactory;
 import server.settings.Constants;
 import server.settings.PropertiesLoader;
 import server.start.SocketCommunication;
@@ -23,14 +22,13 @@ import server.start.SocketCommunication;
  *
  * @author Djina
  */
-public class Server extends Application {
+public class Server extends Application{
     
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
         btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+        btn.setOnAction(new EventHandler<ActionEvent>() {     
             @Override
             public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
@@ -47,13 +45,9 @@ public class Server extends Application {
         primaryStage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws IOException, SQLException {
-        SocketCommunication server = new SocketCommunication(Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)));
+        SocketCommunication server = new SocketCommunication(Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)), 2);
         server.start();
-        //DBBConnectionFactory.getInstance().getConnection();
         launch(args);
     }
     

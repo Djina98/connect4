@@ -6,13 +6,13 @@
 package server.client;
 
 import common.domain.GenericEntity;
+import common.domain.Player;
 import common.request.Receiver;
 import common.request.Request;
 import common.response.Response;
 import common.response.ResponseStatus;
 import common.response.Sender;
 import java.net.Socket;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.controller.Controller;
@@ -63,9 +63,9 @@ public class HandleClientRequest extends Thread{
                                
                                 response.setResult(object);
                                 response.setStatus(ResponseStatus.SUCCESS);
-                                response.setMessage("Player successfully signed in!");     
                                 ClientSession.getInstance().addPlayer(object);
-                                
+                                //int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
+                                //response.setMessage("Player " + number);   
                             } catch (Exception ex) {
                                 Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
                                 response.setException(ex);
@@ -77,9 +77,9 @@ public class HandleClientRequest extends Thread{
                                
                                 response.setResult(object);
                                 response.setStatus(ResponseStatus.SUCCESS);
-                                response.setMessage("Player successfully logged in!");     
                                 ClientSession.getInstance().addPlayer(object);
-                                
+                                //int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
+                                //response.setMessage("Player " + number);                                  
                             } catch (Exception ex) {
                                 Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
                                 response.setException(ex);

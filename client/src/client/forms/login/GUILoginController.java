@@ -6,9 +6,13 @@
 package client.forms.login;
 
 import client.communication.Controller;
+import client.forms.game.FXMLGameController;
 import client.main.GameStage;
 import client.session.Session;
 import common.domain.Player;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -35,7 +39,16 @@ public class GUILoginController {
             try {
                 Player player = Controller.getInstance().login(nickname, password);
                 Session.getInstance().setPlayer(player);
-                GameStage.getInstance().setScene("client/forms/game/FXMLGame.fxml");
+                //FXMLGameController game = new FXMLGameController();
+                //GameStage.getInstance().setScene(new Scene(game.createContent()));
+                FXMLGameController controller;
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
+		GridPane rootGridPane = loader.load();
+		controller = loader.getController();
+		controller.createContent();
+                Scene scene = new Scene(rootGridPane);
+                GameStage.getInstance().setScene(scene);
+                //GameStage.getInstance().setScene("client/forms/game/FXMLGame.fxml");
             } catch (Exception ex) {
                 System.out.println(ex);
                 fxmlLoginController.lblInfo.setText(ex.getMessage());
