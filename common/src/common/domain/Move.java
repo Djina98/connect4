@@ -19,14 +19,14 @@ public class Move implements GenericEntity{
     private Long gameId;
     private Long playerId;
     private int row;
-    private int column;
+    private int col;
 
-    public Move(Long id, Long gameId, Long playerId, int row, int column) {
+    public Move(Long id, Long gameId, Long playerId, int row, int col) {
         this.id = id;
         this.gameId = gameId;
         this.playerId = playerId;
         this.row = row;
-        this.column = column;
+        this.col = col;
     }
 
     public Long getId() {
@@ -61,17 +61,17 @@ public class Move implements GenericEntity{
         this.row = row;
     }
 
-    public int getColumn() {
-        return column;
+    public int getCol() {
+        return col;
     }
 
-    public void setColumn(int column) {
-        this.column = column;
+    public void setCol(int col) {
+        this.col = col;
     }
 
     @Override
     public String toString() {
-        return "Move{" + "id=" + id + ", gameId=" + gameId + ", playerId=" + playerId + ", row=" + row + ", column=" + column + '}';
+        return "Move{" + "id=" + id + ", gameId=" + gameId + ", playerId=" + playerId + ", row=" + row + ", column=" + col + '}';
     }
 
     @Override
@@ -81,7 +81,7 @@ public class Move implements GenericEntity{
         hash = 53 * hash + Objects.hashCode(this.gameId);
         hash = 53 * hash + Objects.hashCode(this.playerId);
         hash = 53 * hash + this.row;
-        hash = 53 * hash + this.column;
+        hash = 53 * hash + this.col;
         return hash;
     }
 
@@ -100,7 +100,7 @@ public class Move implements GenericEntity{
         if (this.row != other.row) {
             return false;
         }
-        if (this.column != other.column) {
+        if (this.col != other.col) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -128,13 +128,13 @@ public class Move implements GenericEntity{
         sb.append(gameId).
                 append(", ").append(playerId).
                 append(", ").append(row).
-                append(", ").append(column);
+                append(", ").append(col);
         return sb.toString();
     }
 
     @Override
     public String getAtrNames() {
-        return "gameId,playerId,row,column";
+        return "gameId,playerId,row,col";
     }
 
     @Override
@@ -144,7 +144,7 @@ public class Move implements GenericEntity{
 
     @Override
     public String getWhereCondition() {
-        return "gameId=" + gameId;
+        return "id=" + id;
     }
 
     @Override
@@ -154,7 +154,7 @@ public class Move implements GenericEntity{
             long dbGameId = rs.getLong("gameId");
             long dbPlayerId = rs.getLong("playerId");
             int dbRow = rs.getInt("row");
-            int dbColumn = rs.getInt("column");
+            int dbColumn = rs.getInt("col");
 
             return new Move(dbId, dbGameId, dbPlayerId, dbRow, dbColumn);
         } catch (SQLException e) {
