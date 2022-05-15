@@ -5,6 +5,7 @@
  */
 package client.communication;
 
+import common.domain.Move;
 import common.domain.Player;
 import common.request.Request;
 import common.request.RequestOperation;
@@ -52,6 +53,16 @@ public class Controller {
             return (Player) response.getResult();
         }
         throw response.getException();
+    }
+    
+    public void makeMove(Move move) throws Exception {
+        Request request = new Request(RequestOperation.MAKE_MOVE, move);
+        socketCommunication.sendRequest(request);
+        Response response = socketCommunication.readResponse();
+        if (response.getStatus() == ResponseStatus.ERROR) {
+            throw response.getException();
+        }
+        
     }
 
 }

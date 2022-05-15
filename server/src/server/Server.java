@@ -46,7 +46,7 @@ public class Server extends Application{
     }
 
     public static void main(String[] args) throws IOException, SQLException {
-        SocketCommunication server = new SocketCommunication(Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)), 2);
+        SocketCommunication server = SocketCommunication.getInstance();
         server.start();
         launch(args);
     }

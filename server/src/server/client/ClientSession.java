@@ -17,7 +17,7 @@ public class ClientSession {
     private static ClientSession instance;
     ArrayList<Player> players;
 
-    public ClientSession() {
+    private ClientSession() {
         players = new ArrayList<>();
     }
 
@@ -42,7 +42,7 @@ public class ClientSession {
     
     public int getIndexOfPlayer(Player player){
         for(int i = 0; i < players.size(); i++){
-            if(players.get(i).getNickname().equals(player.getNickname()))
+            if(players.get(i).getId().equals(player.getId()))
                 return i;
         }
         

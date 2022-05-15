@@ -13,5 +13,6 @@ import java.io.Serializable;
  */
 public enum RequestOperation implements Serializable{
     LOGIN,
-    SIGNUP
+    SIGNUP,
+    MAKE_MOVE
 }

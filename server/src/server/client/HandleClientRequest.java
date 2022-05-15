@@ -16,6 +16,8 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.controller.Controller;
+import server.dbb.DBBConnectionFactory;
+import server.start.SocketCommunication;
 
 /**
  *
@@ -23,11 +25,11 @@ import server.controller.Controller;
  */
 public class HandleClientRequest extends Thread{
     private Socket socket;
-    Sender sender;
-    Receiver receiver;
+    private Sender sender;
+    private Receiver receiver;
 
     public HandleClientRequest(Socket socket) {
-        this.socket = socket;        
+        this.socket = socket;    
         sender = new Sender(socket);
         receiver = new Receiver(socket);
     }
@@ -51,47 +53,74 @@ public class HandleClientRequest extends Thread{
 
     private void handleRequest() throws Exception {
         while (!isInterrupted()) {
-            Request request = (Request) receiver.receive();
-            Response response = new Response();
+            try{
+                Request request = (Request) receiver.receive();
+                Response response = new Response();
             
-            try {
-                System.out.println("Operation: " + request.getOperation());
-                switch(request.getOperation()){
-                        case SIGNUP:
-                            try {
-                                GenericEntity object = Controller.getInstance().signup((GenericEntity) request.getData());
-                               
-                                response.setResult(object);
-                                response.setStatus(ResponseStatus.SUCCESS);
-                                ClientSession.getInstance().addPlayer(object);
-                                //int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
-                                //response.setMessage("Player " + number);   
-                            } catch (Exception ex) {
-                                Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
-                                response.setException(ex);
-                            }
-                            break;
-                        case LOGIN:
-                            try {
-                                GenericEntity object = Controller.getInstance().login((GenericEntity) request.getData());
-                               
-                                response.setResult(object);
-                                response.setStatus(ResponseStatus.SUCCESS);
-                                ClientSession.getInstance().addPlayer(object);
-                                //int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
-                                //response.setMessage("Player " + number);                                  
-                            } catch (Exception ex) {
-                                Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
-                                response.setException(ex);
-                            }
-                            break;
-                }      
+                try {
+                    System.out.println("Operation: " + request.getOperation());
+                    switch(request.getOperation()){
+                            case SIGNUP:
+                                try {
+                                    GenericEntity object = Controller.getInstance().signup((GenericEntity) request.getData());
+
+                                    response.setResult(object);
+                                    response.setStatus(ResponseStatus.SUCCESS);
+                                    ClientSession.getInstance().addPlayer(object);
+                                    int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
+                                    if(first(++number))
+                                        response.setMessage("You are player #" + (++number) + ". Waiting for player #2 to connect.");
+                                    else
+                                        response.setMessage("You are player #" + (++number));
+                                } catch (Exception ex) {
+                                    Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
+                                    response.setStatus(ResponseStatus.ERROR);
+                                    response.setException(ex);
+                                }
+                                break;
+                            case LOGIN:
+                                try {
+                                    GenericEntity object = Controller.getInstance().login((GenericEntity) request.getData());
+
+                                    response.setResult(object);
+                                    response.setStatus(ResponseStatus.SUCCESS);
+                                    ClientSession.getInstance().addPlayer(object);
+                                    int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
+                                    if(first(++number))
+                                        response.setMessage("You are player #" + (++number) + ". Waiting for player #2 to connect.");
+                                    else
+                                        response.setMessage("You are player #" + (++number));
+                                } catch (Exception ex) {
+                                    Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
+                                    response.setStatus(ResponseStatus.ERROR);
+                                    response.setException(ex);
+                                }
+                                break;
+                            case MAKE_MOVE:
+                                try {
+                                    Controller.getInstance().makeMove((GenericEntity) request.getData());
+                                    response.setStatus(ResponseStatus.SUCCESS);
+                                } catch (Exception ex) {
+                                    Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
+                                    response.setStatus(ResponseStatus.ERROR);
+                                    response.setException(ex);
+                                }
+                                break;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                sender.send(response);
             } catch (Exception ex) {
-                ex.printStackTrace();
-                response.setStatus(ResponseStatus.ERROR);
-                response.setException(ex);
+                System.out.println("Player has disconnected.");
+                ClientSession.getInstance().logoutAll();     
+                SocketCommunication.getInstance().stopServer();
+                DBBConnectionFactory.getInstance().closeConnection();   
             }
-            sender.send(response);
         }
+    }
+    
+    private boolean first(int number){
+        return number == 1;
     }
 }

@@ -5,12 +5,15 @@
  */
 package server.start;
 
-import common.response.Sender;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import server.client.HandleClientRequest;
+import server.settings.Constants;
+import server.settings.PropertiesLoader;
 
 /**
  *
@@ -18,14 +21,27 @@ import server.client.HandleClientRequest;
  */
 public class SocketCommunication extends Thread{
     private int port, numOfPlayers, maxPlayers;
-    ServerSocket serverSocket;
-    ArrayList<HandleClientRequest> players;
+    private ServerSocket serverSocket;
+    private ArrayList<HandleClientRequest> players;
+    private static SocketCommunication instance;
     
-    public SocketCommunication(int port, int maxPlayers) throws IOException {
+    
+    private SocketCommunication(int port, int maxPlayers) throws IOException {
         this.port = port;
         serverSocket = new ServerSocket(port);
         this.maxPlayers = maxPlayers;
         this.players = new ArrayList<>();
+    }
+    
+    public static SocketCommunication getInstance() {
+        if (instance == null) {
+            try {
+                instance = new SocketCommunication(Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)), 2);
+            } catch (IOException ex) {
+                Logger.getLogger(SocketCommunication.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return instance;
     }
     
     @Override
@@ -33,7 +49,7 @@ public class SocketCommunication extends Thread{
         System.out.println("###### GAME SERVER ######");
         System.out.println("Waiting for connections...");
         try {
-            while (numOfPlayers < maxPlayers) {   
+            while (!isInterrupted()) {   
                 Socket socket = serverSocket.accept();
                 HandleClientRequest handleClientRequest = new HandleClientRequest(socket);
                 players.add(handleClientRequest);
@@ -49,7 +65,6 @@ public class SocketCommunication extends Thread{
     }
 
     public void stopServer() throws IOException {
-        serverSocket.close();
         for (HandleClientRequest player : players) {
             player.getSocket().close();
             
