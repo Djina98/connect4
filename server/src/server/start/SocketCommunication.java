@@ -20,7 +20,20 @@ import server.settings.PropertiesLoader;
  * @author Djina
  */
 public class SocketCommunication extends Thread{
-    private int port, numOfPlayers, maxPlayers;
+    
+    public static int PLAYER1 = 1; // Indicate player 1
+    public static int PLAYER2 = 2; // Indicate player 2
+    public static int PLAYER1_WON = 1; // Indicate player 1 won
+    public static int PLAYER2_WON = 2; // Indicate player 2 won
+    public static int DRAW = 3; // Indicate a draw
+    public static int CONTINUE = 4; // Indicate to continue
+
+    private int sessionNo = 1; // Number a session
+
+    public static final int COLS = 7;
+    public static final int ROWS = 6;
+    
+    private int port;
     private ServerSocket serverSocket;
     private ArrayList<HandleClientRequest> players;
     private static SocketCommunication instance;
@@ -29,7 +42,6 @@ public class SocketCommunication extends Thread{
     private SocketCommunication(int port, int maxPlayers) throws IOException {
         this.port = port;
         serverSocket = new ServerSocket(port);
-        this.maxPlayers = maxPlayers;
         this.players = new ArrayList<>();
     }
     
@@ -54,9 +66,6 @@ public class SocketCommunication extends Thread{
                 HandleClientRequest handleClientRequest = new HandleClientRequest(socket);
                 players.add(handleClientRequest);
                 handleClientRequest.start();
-                
-                numOfPlayers++;
-                System.out.println("Player number " + numOfPlayers + " has connected to server.");
             }
             System.out.println("No longer accepting connections.");
         } catch (Exception ex) {

@@ -46,6 +46,7 @@ public class GUILoginController {
 		controller.createContent();
                 Scene scene = new Scene(rootGridPane);
                 GameStage.getInstance().setScene(scene);
+                //GameStage.getInstance().setScene("client/forms/mode/FXMLGameMode.fxml");
                 
             } catch (Exception ex) {
                 System.out.println(ex);

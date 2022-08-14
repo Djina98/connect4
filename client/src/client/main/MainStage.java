@@ -5,6 +5,7 @@
  */
 package client.main;
 
+//import client.forms.game.EnemyMove;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -20,6 +21,8 @@ public class MainStage extends Application{
         stage.setResizable(false);
         GameStage.setStage(stage);
         GameStage.getInstance().setScene("client/forms/login/FXMLLogin.fxml");
+        //EnemyMove enemyMove = new EnemyMove();
+        //enemyMove.start();
     }
 
     /**

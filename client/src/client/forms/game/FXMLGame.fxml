@@ -16,5 +16,17 @@
   </rowConstraints>
    <children>
       <Pane fx:id="gamePane" prefHeight="571.0" prefWidth="654.0" />
+      <Pane fx:id="infoPane" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <Label fx:id="lblStatus" alignment="CENTER" layoutX="13.0" layoutY="185.0" prefHeight="191.0" prefWidth="321.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="34.0" />
+               </font></Label>
+            <Label fx:id="lblTitle" alignment="CENTER" layoutX="13.0" layoutY="99.0" prefHeight="29.0" prefWidth="321.0" textAlignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </children>
+      </Pane>
    </children>
 </GridPane>

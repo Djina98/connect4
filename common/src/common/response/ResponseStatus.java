@@ -13,5 +13,9 @@ import java.io.Serializable;
  */
 public enum ResponseStatus implements Serializable{
     SUCCESS,
-    ERROR
+    ERROR,
+    PLAYER1_WON,
+    PLAYER2_WON,
+    DRAW,
+    CONTINUE
 }

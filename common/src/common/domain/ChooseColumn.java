@@ -6,48 +6,36 @@
 package common.domain;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
  * @author Djina
  */
-public class Move implements GenericEntity{
-   
-    private int row;
-    private int col;
+public class ChooseColumn implements GenericEntity{
+    
+    private int column;
 
-    public Move(int row, int col) {
-        this.row = row;
-        this.col = col;
+    public ChooseColumn(int column) {
+        this.column = column;
     }
 
-    public int getRow() {
-        return row;
+    public int getColumn() {
+        return column;
     }
 
-    public void setRow(int row) {
-        this.row = row;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
+    public void setColumn(int column) {
+        this.column = column;
     }
 
     @Override
     public String toString() {
-        return "Move{" + "row=" + row + ", column=" + col + '}';
+        return "ChooseColumn{" + "column=" + column + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 53 * hash + this.row;
-        hash = 53 * hash + this.col;
+        int hash = 3;
+        hash = 73 * hash + this.column;
         return hash;
     }
 
@@ -62,41 +50,33 @@ public class Move implements GenericEntity{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Move other = (Move) obj;
-        if (this.row != other.row) {
-            return false;
-        }
-        if (this.col != other.col) {
+        final ChooseColumn other = (ChooseColumn) obj;
+        if (this.column != other.column) {
             return false;
         }
         return true;
     }
-    
-    
-    
+
     @Override
     public String getClassName() {
-        return "move";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getAtrValues() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(row).
-                append(", ").append(col);
-        return sb.toString();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String getAtrNames() {
-        return "row,col";
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public String setAtrValues() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
     @Override
     public String getWhereCondition() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -104,13 +84,7 @@ public class Move implements GenericEntity{
 
     @Override
     public GenericEntity getNewRecord(ResultSet rs) {
-        try {
-            int dbRow = rs.getInt("row");
-            int dbColumn = rs.getInt("col");
-
-            return new Move(dbRow, dbColumn);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

@@ -5,6 +5,7 @@
  */
 package client.communication;
 
+import common.domain.ChooseColumn;
 import common.domain.Move;
 import common.domain.Player;
 import common.request.Request;
@@ -55,14 +56,37 @@ public class Controller {
         throw response.getException();
     }
     
-    public void makeMove(Move move) throws Exception {
-        Request request = new Request(RequestOperation.MAKE_MOVE, move);
+    public int playGame() throws Exception{
+        Request request = new Request(RequestOperation.PLAY_GAME, null);
         socketCommunication.sendRequest(request);
         Response response = socketCommunication.readResponse();
-        if (response.getStatus() == ResponseStatus.ERROR) {
-            throw response.getException();
-        }
         
+        return (int) response.getResult();
     }
-
+    
+    public int getAvailableRow(int column) throws Exception {
+        ChooseColumn chooseColumn = new ChooseColumn(column);
+        Request request = new Request(RequestOperation.GET_AVAILABLE_ROW, chooseColumn);
+        socketCommunication.sendRequest(request);
+        System.out.println("request sent" + chooseColumn.getColumn());
+        Response response = socketCommunication.readResponse();
+        
+        
+        return (int) response.getResult();
+    }
+    
+    public Response sendMove(int row, int column) throws Exception{
+        Move move = new Move(row, column);
+        Request request = new Request(RequestOperation.SEND_MOVE, move);
+        socketCommunication.sendRequest(request);
+        Response response = socketCommunication.readResponse();
+        System.out.println("GAME STATUS: " + response.getStatus());
+        return response;
+    }
+    
+    public Move receiveMove() throws Exception{
+        Response response = socketCommunication.readResponse();
+        
+        return (Move) response.getResult();
+    }
 }

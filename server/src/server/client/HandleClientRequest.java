@@ -5,14 +5,16 @@
  */
 package server.client;
 
+import common.domain.ChooseColumn;
 import common.domain.GenericEntity;
-import common.domain.Player;
+import common.domain.Move;
 import common.request.Receiver;
 import common.request.Request;
 import common.response.Response;
 import common.response.ResponseStatus;
 import common.response.Sender;
 import java.net.Socket;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.controller.Controller;
@@ -27,6 +29,9 @@ public class HandleClientRequest extends Thread{
     private Socket socket;
     private Sender sender;
     private Receiver receiver;
+//    private static List<HandleClientRequest> players = new LinkedList<>();
+    Connect4ComputerPlayer computer;
+    Connect4ComputerPlayer.gameState gameState;
 
     public HandleClientRequest(Socket socket) {
         this.socket = socket;    
@@ -66,17 +71,12 @@ public class HandleClientRequest extends Thread{
 
                                     response.setResult(object);
                                     response.setStatus(ResponseStatus.SUCCESS);
-                                    ClientSession.getInstance().addPlayer(object);
-                                    int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
-                                    if(first(++number))
-                                        response.setMessage("You are player #" + (++number) + ". Waiting for player #2 to connect.");
-                                    else
-                                        response.setMessage("You are player #" + (++number));
                                 } catch (Exception ex) {
                                     Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
                                     response.setStatus(ResponseStatus.ERROR);
                                     response.setException(ex);
                                 }
+                                sender.send(response);
                                 break;
                             case LOGIN:
                                 try {
@@ -84,33 +84,84 @@ public class HandleClientRequest extends Thread{
 
                                     response.setResult(object);
                                     response.setStatus(ResponseStatus.SUCCESS);
-                                    ClientSession.getInstance().addPlayer(object);
-                                    int number = ClientSession.getInstance().getIndexOfPlayer((Player) object);
-                                    if(first(++number))
-                                        response.setMessage("You are player #" + (++number) + ". Waiting for player #2 to connect.");
-                                    else
-                                        response.setMessage("You are player #" + (++number));
                                 } catch (Exception ex) {
                                     Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
                                     response.setStatus(ResponseStatus.ERROR);
                                     response.setException(ex);
                                 }
+                                this.computer = new Connect4ComputerPlayer();
+                                sender.send(response);
                                 break;
-                            case MAKE_MOVE:
-                                try {
-                                    Controller.getInstance().makeMove((GenericEntity) request.getData());
-                                    response.setStatus(ResponseStatus.SUCCESS);
-                                } catch (Exception ex) {
-                                    Logger.getLogger(HandleClientRequest.class.getName()).log(Level.SEVERE, null, ex);
-                                    response.setStatus(ResponseStatus.ERROR);
-                                    response.setException(ex);
+//                            case PLAY_GAME:  
+////                                new Thread(new AgainstComputer(sender, receiver)).start();  
+//                                this.computer = new Connect4ComputerPlayer();
+//                                response.setResult(1);
+//                                response.setStatus(ResponseStatus.SUCCESS);
+//                                sender.send(response);
+//                                break;
+                            case GET_AVAILABLE_ROW:
+                                ChooseColumn c1 = (ChooseColumn) request.getData(); // receive which button is clicked
+                                 
+                                int r1 = computer.getFirstEmptyRow(c1.getColumn()); // find out which row to setToken
+                                response.setResult(r1);
+                                sender.send(response); // write back the row to player 1
+                                break;
+                            case SEND_MOVE:    
+                                 Move move = (Move) request.getData();
+                                 int row = move.getRow();
+                                 int column = move.getCol();
+                                 gameState = computer.updateGrid(column, 'X');   
+
+
+                                // Check if Player wins
+                                if (gameState == Connect4ComputerPlayer.gameState.XWin) {
+                                    response.setStatus(ResponseStatus.PLAYER1_WON);
+                                    sender.send(response);
+                                    break;
+                                } else if (gameState == Connect4ComputerPlayer.gameState.DRAW) { // Check if all cells are filled
+                                    response.setResult(ResponseStatus.DRAW);
+                                    sender.send(response);
+                                    break;
+                                } else {
+
                                 }
-                                break;
-                    }
+
+                                // -----Computer-----
+                                Random rand = new Random();
+                                int c2;
+                                int r2;
+                                do {
+                                    c2 = Math.abs(rand.nextInt() % SocketCommunication.COLS); // generate the column
+                                    r2 = computer.getFirstEmptyRow(c2); // find out which row to setToken
+                                } while (r2 == -1);
+
+                                // Generate a move from computer
+                                gameState = computer.updateGrid(c2, 'O');
+
+                                // Check if Player 2 wins
+                                if (gameState == Connect4ComputerPlayer.gameState.OWin) {
+                                    response.setStatus(ResponseStatus.PLAYER2_WON);
+                                    response.setResult(new Move(r2, c2));
+                                    sender.send(response);
+                                    break;
+                                } else if (gameState == Connect4ComputerPlayer.gameState.DRAW) { // Check if all cells are filled
+                                    response.setStatus(ResponseStatus.DRAW);
+                                    sender.send(response);
+                                    break;
+                                } else {
+                                    // Notify player 1 to take the turn
+                                    response.setStatus(ResponseStatus.CONTINUE);
+                                    // Send player 2's selected row and column to player 1
+                                    response.setResult(new Move(r2, c2));
+                                    System.out.println("row: " + r2 + " col: " + c2);
+                                    sender.send(response);
+                                }
+                                break; 
+                            }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                sender.send(response);
+//                sender.send(response);
             } catch (Exception ex) {
                 System.out.println("Player has disconnected.");
                 ClientSession.getInstance().logoutAll();     
@@ -118,9 +169,5 @@ public class HandleClientRequest extends Thread{
                 DBBConnectionFactory.getInstance().closeConnection();   
             }
         }
-    }
-    
-    private boolean first(int number){
-        return number == 1;
     }
 }

@@ -41,13 +41,14 @@ public class GUISignupController {
                 player.setNickname(nickname);
                 player.setPassword(password);
                 Session.getInstance().setPlayer(player);
-                FXMLGameController controller;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
-		GridPane rootGridPane = loader.load();
-		controller = loader.getController();
-		controller.createContent();
-                Scene scene = new Scene(rootGridPane);
-                GameStage.getInstance().setScene(scene);
+//                FXMLGameController controller;
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
+//		GridPane rootGridPane = loader.load();
+//		controller = loader.getController();
+//		controller.createContent();
+//                Scene scene = new Scene(rootGridPane);
+//                GameStage.getInstance().setScene(scene);
+                GameStage.getInstance().setScene("client/forms/mode/FXMLGameMode.fxml");
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
                 this.fxmlSignupController.lblInfo.setText(ex.getMessage());

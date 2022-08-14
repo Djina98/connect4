@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
  * @author Djina
  */
 public class FXMLLoginController {
+    
     @FXML
     public Label lblNickname;
     

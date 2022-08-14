@@ -14,5 +14,8 @@ import java.io.Serializable;
 public enum RequestOperation implements Serializable{
     LOGIN,
     SIGNUP,
-    MAKE_MOVE
+    GET_AVAILABLE_ROW,
+    SEND_MOVE,
+    RECEIVE_MOVE,
+    PLAY_GAME
 }
