@@ -76,6 +76,7 @@ public class HandleClientRequest extends Thread{
                                     response.setStatus(ResponseStatus.ERROR);
                                     response.setException(ex);
                                 }
+                                this.computer = new Connect4ComputerPlayer();
                                 sender.send(response);
                                 break;
                             case LOGIN:
@@ -92,18 +93,12 @@ public class HandleClientRequest extends Thread{
                                 this.computer = new Connect4ComputerPlayer();
                                 sender.send(response);
                                 break;
-//                            case PLAY_GAME:  
-////                                new Thread(new AgainstComputer(sender, receiver)).start();  
-//                                this.computer = new Connect4ComputerPlayer();
-//                                response.setResult(1);
-//                                response.setStatus(ResponseStatus.SUCCESS);
-//                                sender.send(response);
-//                                break;
                             case GET_AVAILABLE_ROW:
                                 ChooseColumn c1 = (ChooseColumn) request.getData(); // receive which button is clicked
                                  
                                 int r1 = computer.getFirstEmptyRow(c1.getColumn()); // find out which row to setToken
                                 response.setResult(r1);
+                                System.out.println("*******" + r1);
                                 sender.send(response); // write back the row to player 1
                                 break;
                             case SEND_MOVE:    

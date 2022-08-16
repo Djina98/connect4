@@ -3,29 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.forms.mode;
+package client.forms.main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 
 /**
  *
  * @author Djina
  */
-public class FXMLGameModeController {
+public class FXMLMainController {
     
     @FXML
-    public Button btnOtherPlayer;
+    public MenuBar menuBarMainMenu;
     
     @FXML
-    public Button btnComputer;
+    public MenuItem mnItmPlayGame;
 
-    public GUIGameModeController guiGameModeController;
+    @FXML
+    public MenuItem mnItmGameRules;
+    
+//    @FXML
+//    public Label lblWelcome;
+//    
+//    @FXML
+//    public Label lblPlayer;
+    
+    public GUIMainController guiMainController;
     
     @FXML
     public void initialize() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, IOException, FileNotFoundException, ClassNotFoundException {
-        guiGameModeController = new GUIGameModeController(this);      
+        guiMainController = new GUIMainController(this);      
     }
 }

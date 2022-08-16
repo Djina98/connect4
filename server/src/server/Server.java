@@ -23,7 +23,7 @@ import server.start.SocketCommunication;
  * @author Djina
  */
 public class Server extends Application{
-    
+ 
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();

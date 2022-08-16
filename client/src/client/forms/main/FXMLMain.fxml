@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.main.FXMLMainController">
+   <children>
+      <MenuBar fx:id="menuBarMainMenu" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+        <menus>
+          <Menu fx:id="mnGame" mnemonicParsing="false" text="Game">
+            <items>
+                  <MenuItem fx:id="mnItmPlayGame" mnemonicParsing="false" text="Play game" />
+            </items>
+          </Menu>
+          <Menu fx:id="mnInfo" mnemonicParsing="false" text="Info">
+               <items>
+                  <MenuItem fx:id="mnItmGameRules" mnemonicParsing="false" text="Game rules" />
+               </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>

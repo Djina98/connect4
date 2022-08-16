@@ -68,10 +68,9 @@ public class Controller {
         ChooseColumn chooseColumn = new ChooseColumn(column);
         Request request = new Request(RequestOperation.GET_AVAILABLE_ROW, chooseColumn);
         socketCommunication.sendRequest(request);
-        System.out.println("request sent" + chooseColumn.getColumn());
         Response response = socketCommunication.readResponse();
         
-        
+        System.out.println("RESPONSE: " + response.getResult().toString());
         return (int) response.getResult();
     }
     
