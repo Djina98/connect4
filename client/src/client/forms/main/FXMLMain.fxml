@@ -23,5 +23,15 @@
           </Menu>
         </menus>
       </MenuBar>
+      <Label fx:id="lblWelcome" alignment="CENTER" layoutY="106.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPlayer" alignment="CENTER" layoutY="157.0" prefHeight="17.0" prefWidth="600.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -7,11 +7,9 @@ package server.controller;
 
 import common.domain.GenericEntity;
 import java.sql.SQLException;
-import java.util.Optional;
 import server.dbb.impl.RepositoryDBGeneric;
 import server.operation.AbstractGenericOperation;
 import server.operation.impl.LoginOperation;
-import server.operation.impl.MakeMoveOperation;
 import server.operation.impl.SignupOperation;
 import server.repository.Repository;
 
@@ -44,10 +42,5 @@ public class Controller {
         AbstractGenericOperation so = new LoginOperation();
         so.execute(entity);
         return ((LoginOperation) so).getObject();
-    }
-    
-    public void makeMove(GenericEntity entity) throws SQLException, Exception {
-        AbstractGenericOperation so = new MakeMoveOperation();
-        so.execute(entity);
     }
 }

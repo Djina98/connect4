@@ -34,6 +34,7 @@ public class LoginOperation extends AbstractGenericOperation<Player, Player>{
             if(!player.getPassword().equals(entity.getPassword())) {
                 throw new RuntimeException("Bad password!");
             }
+            object = player;
         } else {
            throw new RuntimeException("Invalid nickname!");
         }

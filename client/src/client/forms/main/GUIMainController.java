@@ -22,7 +22,7 @@ public class GUIMainController {
     
     public GUIMainController(FXMLMainController fxmlMainController) {
         this.fxmlMainController = fxmlMainController;
-//        this.fxmlMainController.lblPlayer.setText(Session.getInstance().getPlayer().getNickname());
+        this.fxmlMainController.lblPlayer.setText(Session.getInstance().getPlayer().getNickname());
         this.fxmlMainController.mnItmPlayGame.setOnAction(event -> playGame());
 
     }

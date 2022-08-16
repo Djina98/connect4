@@ -27,11 +27,12 @@ public class FXMLMainController {
     @FXML
     public MenuItem mnItmGameRules;
     
-//    @FXML
-//    public Label lblWelcome;
-//    
-//    @FXML
-//    public Label lblPlayer;
+
+    @FXML
+    public Label lblWelcome;
+    
+    @FXML
+    public Label lblPlayer;
     
     public GUIMainController guiMainController;
     
