@@ -6,13 +6,9 @@
 package client.forms.signup;
 
 import client.communication.Controller;
-import client.forms.game.FXMLGameController;
 import client.main.GameStage;
 import client.session.Session;
 import common.domain.Player;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**

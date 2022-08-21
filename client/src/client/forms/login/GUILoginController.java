@@ -35,13 +35,6 @@ public class GUILoginController {
             try {
                 Player player = Controller.getInstance().login(nickname, password);
                 Session.getInstance().setPlayer(player);
-//                FXMLGameController controller;
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
-//		GridPane rootGridPane = loader.load();
-//		controller = loader.getController();
-//		controller.createContent();
-//                Scene scene = new Scene(rootGridPane);
-//                GameStage.getInstance().setScene(scene);
                 GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml");
                 
             } catch (Exception ex) {

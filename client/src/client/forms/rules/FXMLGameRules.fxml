@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.rules.FXMLGameRulesController">
+   <children>
+      <TextArea fx:id="txtRules" editable="false" layoutX="12.0" layoutY="73.0" prefHeight="312.0" prefWidth="574.0" text="OBJECTIVE:&#10;&#10;To be the first player to connect 4 of the same colored discs in a row &#10;(either vertically, horizontally, or diagonally)&#10;&#10;HOW TO PLAY:&#10;&#10;First, decide who goes first and what color each player will have. &#10;Players must alternate turns, and only one disc can be dropped in each turn. &#10;On your turn, drop one of your colored discs from the top into any of the seven slots. &#10;The game ends when there is a 4-in-a-row or a stalemate." />
+      <Button fx:id="btnBack" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="138.0" text="Go back to main menu" />
+   </children>
+</AnchorPane>

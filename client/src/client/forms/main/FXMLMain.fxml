@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.text.*?>
+ 
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+ 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.main.FXMLMainController">
-   <children>
-      <MenuBar fx:id="menuBarMainMenu" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+    <children>
+      <MenuBar fx:id="MenuBarMainManu" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
         <menus>
-          <Menu fx:id="mnGame" mnemonicParsing="false" text="Game">
-            <items>
-                  <MenuItem fx:id="mnItmPlayGame" mnemonicParsing="false" text="Play game" />
-            </items>
-          </Menu>
-          <Menu fx:id="mnInfo" mnemonicParsing="false" text="Info">
+  <Menu fx:id="mnGame" mnemonicParsing="false" text="Game ">
+  
                <items>
-                  <MenuItem fx:id="mnItmGameRules" mnemonicParsing="false" text="Game rules" />
+  
+            <MenuItem fx:id="mnItmPlayGame" mnemonicParsing="false" onAction="#playGame" text="Play game" />  
                </items>
-          </Menu>
+  
+          </Menu>           
+  <Menu fx:id="mnInfo" mnemonicParsing="false" text="Info ">
+  
+               <items>
+  
+            <MenuItem fx:id="mnItmGameRules" mnemonicParsing="false" onAction="#gameRules" text="Game rules" />  
+               </items>
+  
+          </Menu>           
         </menus>
       </MenuBar>
       <Label fx:id="lblWelcome" alignment="CENTER" layoutY="106.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
-         <font>
-            <Font size="24.0" />
-         </font>
       </Label>
       <Label fx:id="lblPlayer" alignment="CENTER" layoutY="157.0" prefHeight="17.0" prefWidth="600.0">
-         <font>
-            <Font size="24.0" />
-         </font>
       </Label>
-   </children>
+    </children>
 </AnchorPane>

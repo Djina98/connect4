@@ -23,24 +23,31 @@ public class GUIMainController {
     public GUIMainController(FXMLMainController fxmlMainController) {
         this.fxmlMainController = fxmlMainController;
         this.fxmlMainController.lblPlayer.setText(Session.getInstance().getPlayer().getNickname());
-        this.fxmlMainController.mnItmPlayGame.setOnAction(event -> playGame());
+//        this.fxmlMainController.mnItmPlayGame.setOnAction(event -> playGame());
+//        this.fxmlMainController.mnItmGameRules.setOnAction(event -> gameRules());
 
     }
 
-    private void playGame() {
-        fxmlMainController.mnItmPlayGame.setOnAction((event) -> {          
-            try {
-                FXMLGameController controller;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
-		GridPane rootGridPane = loader.load();
-		controller = loader.getController();
-		controller.createContent();
-                Scene scene = new Scene(rootGridPane);
-                GameStage.getInstance().setScene(scene);
-                
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
-        });
-    }
+//    private void playGame() {
+//        fxmlMainController.mnItmPlayGame.setOnAction((event) -> {          
+//            try {
+//                FXMLGameController controller;
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("/client/forms/game/FXMLGame.fxml"));
+//		GridPane rootGridPane = loader.load();
+//		controller = loader.getController();
+//		controller.createContent();
+//                Scene scene = new Scene(rootGridPane);
+//                GameStage.getInstance().setScene(scene);
+//                
+//            } catch (Exception ex) {
+//                System.out.println(ex);
+//            }
+//        });
+//    }
+//    
+//    private void gameRules() {
+//        fxmlMainController.mnItmGameRules.setOnAction((event) -> {
+//            GameStage.getInstance().setScene("client/forms/rules/FXMLGameRules.fxml");
+//        });
+//    }
 }
