@@ -10,29 +10,29 @@
  
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.forms.main.FXMLMainController">
     <children>
-      <MenuBar fx:id="MenuBarMainManu" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
-        <menus>
-  <Menu fx:id="mnGame" mnemonicParsing="false" text="Game ">
+        <MenuBar fx:id="MenuBarMainManu" layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+            <menus>
+                <Menu fx:id="mnGame" mnemonicParsing="false" text="Game ">
   
-               <items>
+                    <items>
   
-            <MenuItem fx:id="mnItmPlayGame" mnemonicParsing="false" onAction="#playGame" text="Play game" />  
-               </items>
+                        <MenuItem fx:id="mnItmPlayGame" mnemonicParsing="false" onAction="#playGame" text="Play game" />  
+                    </items>
   
-          </Menu>           
-  <Menu fx:id="mnInfo" mnemonicParsing="false" text="Info ">
+                </Menu>           
+                <Menu fx:id="mnInfo" mnemonicParsing="false" text="Info ">
   
-               <items>
+                    <items>
   
-            <MenuItem fx:id="mnItmGameRules" mnemonicParsing="false" onAction="#gameRules" text="Game rules" />  
-               </items>
+                        <MenuItem fx:id="mnItmGameRules" mnemonicParsing="false" onAction="#gameRules" text="Game rules" />  
+                    </items>
   
-          </Menu>           
-        </menus>
-      </MenuBar>
-      <Label fx:id="lblWelcome" alignment="CENTER" layoutY="106.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
-      </Label>
-      <Label fx:id="lblPlayer" alignment="CENTER" layoutY="157.0" prefHeight="17.0" prefWidth="600.0">
-      </Label>
+                </Menu>           
+            </menus>
+        </MenuBar>
+        <Label fx:id="lblWelcome" alignment="CENTER" layoutY="106.0" prefHeight="17.0" prefWidth="600.0" text="Welcome">
+        </Label>
+        <Label fx:id="lblPlayer" alignment="CENTER" layoutY="157.0" prefHeight="17.0" prefWidth="600.0">
+        </Label>
     </children>
 </AnchorPane>
