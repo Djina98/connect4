@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package client.main;
+package server;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -16,21 +16,21 @@ import javafx.stage.Stage;
  *
  * @author Djina
  */
-public class GameStage {
+public class ServerStage {
     private final Stage stage;
-    private static GameStage instance;
+    private static ServerStage instance;
 
-    public GameStage(Stage stage) {
+    public ServerStage(Stage stage) {
         this.stage = stage;
     }
     
     public synchronized static void setStage(Stage stage) {
         if(instance == null) {
-            instance = new GameStage(stage);
+            instance = new ServerStage(stage);
         }
     }
     
-    public static GameStage getInstance() {
+    public static ServerStage getInstance() {
         if(instance == null)
             throw new RuntimeException("Stage is not set");
         return instance;

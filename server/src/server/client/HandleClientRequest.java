@@ -19,7 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import server.controller.Controller;
 import server.dbb.DBBConnectionFactory;
-import server.start.SocketCommunication;
+import server.start.Server;
 
 /**
  *
@@ -27,9 +27,9 @@ import server.start.SocketCommunication;
  */
 public class HandleClientRequest extends Thread{
     private Socket socket;
-    private Sender sender;
-    private Receiver receiver;
-//    private static List<HandleClientRequest> players = new LinkedList<>();
+    private final Sender sender;
+    private final Receiver receiver;
+    
     Connect4ComputerPlayer computer;
     Connect4ComputerPlayer.gameState gameState;
 
@@ -98,7 +98,6 @@ public class HandleClientRequest extends Thread{
                                  
                                 int r1 = computer.getFirstEmptyRow(c1.getColumn()); // find out which row to setToken
                                 response.setResult(r1);
-                                System.out.println("*******" + r1);
                                 sender.send(response); // write back the row to player 1
                                 break;
                             case SEND_MOVE:    
@@ -126,7 +125,7 @@ public class HandleClientRequest extends Thread{
                                 int c2;
                                 int r2;
                                 do {
-                                    c2 = Math.abs(rand.nextInt() % SocketCommunication.COLS); // generate the column
+                                    c2 = Math.abs(rand.nextInt() % Server.COLS); // generate the column
                                     r2 = computer.getFirstEmptyRow(c2); // find out which row to setToken
                                 } while (r2 == -1);
 
@@ -156,11 +155,11 @@ public class HandleClientRequest extends Thread{
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-//                sender.send(response);
             } catch (Exception ex) {
+                ex.printStackTrace();
                 System.out.println("Player has disconnected.");
-                ClientSession.getInstance().logoutAll();     
-                SocketCommunication.getInstance().stopServer();
+                //ClientSession.getInstance().logoutAll();     
+                //SocketCommunication.getInstance().stopServer();
                 DBBConnectionFactory.getInstance().closeConnection();   
             }
         }

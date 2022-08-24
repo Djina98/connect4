@@ -6,6 +6,7 @@
 package client.forms.game;
 
 import client.communication.Controller;
+import client.main.GameStage;
 import common.domain.Move;
 import common.response.Response;
 import common.response.ResponseStatus;
@@ -16,9 +17,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.effect.Light;
 import javafx.scene.effect.Lighting;
 import javafx.scene.layout.GridPane;
@@ -28,7 +31,6 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.util.Duration;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 
@@ -82,7 +84,6 @@ public class FXMLGameController {
     @FXML
     public Label lblTitle;
     
-
     public Parent createContent() {
         Shape gridShape = makeGrid();
         rootGridPane.add(gridShape, 0, 0);
@@ -133,19 +134,20 @@ public class FXMLGameController {
             rect.setOnMouseExited(e -> rect.setFill(Color.TRANSPARENT));
 
             final int column = x;
-            //rect.setOnMouseClicked(e -> placeDisc(new FXMLGameController.Disc(redMove), column));
             rect.setOnMouseClicked((MouseEvent event) -> {
                 try {
                     int row = Controller.getInstance().getAvailableRow(column);
-                    System.out.println("Available row: " + row);
-                    if(myTurn){
-                        placeDisc(new FXMLGameController.Disc(redMove), column, row);
-                        
-                        myTurn = false;
-                        rowSelected = row;
-                        columnSelected = column;
-                        lblStatus.setText("Waiting for the other player to move");
-                        waiting = false; 
+                    if(row != -1){
+                        System.out.println("Available row: " + row);
+                        if(myTurn){
+                            placeDisc(new FXMLGameController.Disc(redMove), column, row);
+
+                            myTurn = false;
+                            rowSelected = row;
+                            columnSelected = column;
+                            lblStatus.setText("Waiting for the computer to move");
+                            waiting = false; 
+                        }
                     }
                 } catch (Exception ex) {
                     Logger.getLogger(FXMLGameController.class.getName()).log(Level.SEVERE, null, ex);
@@ -238,16 +240,19 @@ public class FXMLGameController {
         if (response.getStatus() == ResponseStatus.PLAYER1_WON) {
             // Player 1 won, stop playing
             continueToPlay = false;
-                Platform.runLater(() -> lblStatus.setText("You won!"));
+                Platform.runLater(() -> showMessage("Congratulations", "You won!"));
+                Platform.runLater(() -> GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml"));
         } else if (response.getStatus() == ResponseStatus.PLAYER2_WON) {
             // Player 2 won, stop playing
             continueToPlay = false;
-                Platform.runLater(() -> lblStatus.setText("Computer has won!"));
                 receiveMove((Move) response.getResult());
+                Platform.runLater(() -> showMessage("Game over", "Computer has won!"));
+                Platform.runLater(() ->GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml"));
         } else if (response.getStatus() == ResponseStatus.DRAW) {
             // No winner, game is over
             continueToPlay = false;
-            Platform.runLater(() -> lblStatus.setText("Game is over, no winner!"));
+            Platform.runLater(() -> showMessage("Game over", "No winner!"));
+            Platform.runLater(() ->GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml"));
         } else {
             receiveMove((Move) response.getResult());
             Platform.runLater(() -> lblStatus.setText("Your turn"));
@@ -266,9 +271,10 @@ public class FXMLGameController {
         }
     }
     
-    public void showMessage(String message){
+    public void showMessage(String header, String message){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information Dialog");
+            alert.setHeaderText(header);
             alert.setContentText(message);
             alert.showAndWait();
     }

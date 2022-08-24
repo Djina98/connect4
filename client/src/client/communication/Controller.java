@@ -19,11 +19,9 @@ import common.response.ResponseStatus;
  */
 public class Controller {
     private static Controller instance;
-    //private final WebCommunication webCommunication;
     private final SocketCommunication socketCommunication;
     
     private Controller() {
-        //webCommunication = new WebCommunication();
         socketCommunication = new SocketCommunication();
     }
      

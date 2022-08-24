@@ -16,7 +16,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import server.settings.Constants;
 import server.settings.PropertiesLoader;
-import server.start.SocketCommunication;
 
 /**
  *
@@ -25,29 +24,16 @@ import server.start.SocketCommunication;
 public class Server extends Application{
  
     @Override
-    public void start(Stage primaryStage) {
-        Button btn = new Button();
-        btn.setText("Say 'Hello World'");
-        btn.setOnAction(new EventHandler<ActionEvent>() {     
-            @Override
-            public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
-            }
-        });
-        
-        StackPane root = new StackPane();
-        root.getChildren().add(btn);
-        
-        Scene scene = new Scene(root, 300, 250);
-        
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) {
+        stage.setTitle("Connect 4 Server");
+        stage.setResizable(false);
+        ServerStage.setStage(stage);
+        ServerStage.getInstance().setScene("server/form/FXMLServer.fxml");
     }
 
     public static void main(String[] args) throws IOException, SQLException {
-        SocketCommunication server = SocketCommunication.getInstance();
-        server.start();
+//        Server server = Server.getInstance();
+//        server.start();
         launch(args);
     }
     

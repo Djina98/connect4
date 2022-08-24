@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import server.start.SocketCommunication;
+import server.start.Server;
 
 /**
  *
@@ -60,11 +60,11 @@ public class AgainstComputer implements Runnable{
 
                 // Check if Player wins
                 if (gameState == Connect4ComputerPlayer.gameState.XWin) {
-                    response.setResult(SocketCommunication.PLAYER1_WON);
+                    response.setResult(Server.PLAYER1_WON);
                     sender.send(response);
                     break; // Break the loop
                 } else if (gameState == Connect4ComputerPlayer.gameState.DRAW) { // Check if all cells are filled
-                    response.setResult(SocketCommunication.DRAW);
+                    response.setResult(Server.DRAW);
                     sender.send(response);
                     break;
                 } else {
@@ -76,7 +76,7 @@ public class AgainstComputer implements Runnable{
                 int c2;
                 int r2;
                 do {
-                    c2 = Math.abs(rand.nextInt() % SocketCommunication.COLS); // generate the column
+                    c2 = Math.abs(rand.nextInt() % Server.COLS); // generate the column
                     r2 = computer.getFirstEmptyRow(c2); // find out which row to setToken
                 } while (r2 == -1);
 
@@ -85,18 +85,18 @@ public class AgainstComputer implements Runnable{
 
                 // Check if Player 2 wins
                 if (gameState == Connect4ComputerPlayer.gameState.OWin) {
-                    response.setResult(SocketCommunication.PLAYER2_WON);
+                    response.setResult(Server.PLAYER2_WON);
                     sender.send(response);
                     response.setResult(new Move(r2, c2));
                     sender.send(response);
                     break;
                 } else if (gameState == Connect4ComputerPlayer.gameState.DRAW) { // Check if all cells are filled
-                    response.setResult(SocketCommunication.DRAW);
+                    response.setResult(Server.DRAW);
                     sender.send(response);
                     break;
                 } else {
                     // Notify player 1 to take the turn
-                    response.setResult(SocketCommunication.CONTINUE);
+                    response.setResult(Server.CONTINUE);
                     sender.send(response);
 
                     // Send player 2's selected row and column to player 1

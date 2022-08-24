@@ -5,12 +5,7 @@
  */
 package client.forms.main;
 
-import client.forms.game.FXMLGameController;
-import client.main.GameStage;
 import client.session.Session;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 
 /**
  *

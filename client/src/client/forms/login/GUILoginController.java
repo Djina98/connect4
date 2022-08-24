@@ -9,6 +9,7 @@ import client.communication.Controller;
 import client.main.GameStage;
 import client.session.Session;
 import common.domain.Player;
+import javafx.scene.control.Alert;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -37,10 +38,21 @@ public class GUILoginController {
                 Session.getInstance().setPlayer(player);
                 GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml");
                 
+            } catch (RuntimeException e) {
+                e.getStackTrace();
+                showMessage("Server is not active!");
             } catch (Exception ex) {
-                System.out.println(ex);
+                ex.getStackTrace();
                 fxmlLoginController.lblInfo.setText(ex.getMessage());
             }
         });
+    }
+    
+    public void showMessage(String message){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText("Error");
+            alert.setContentText(message);
+            alert.showAndWait();
     }
 }

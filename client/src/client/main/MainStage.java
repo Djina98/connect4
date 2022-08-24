@@ -5,7 +5,6 @@
  */
 package client.main;
 
-//import client.forms.game.EnemyMove;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -17,12 +16,10 @@ public class MainStage extends Application{
     
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setTitle("Connect4");
+        stage.setTitle("Connect 4");
         stage.setResizable(false);
         GameStage.setStage(stage);
         GameStage.getInstance().setScene("client/forms/login/FXMLLogin.fxml");
-        //EnemyMove enemyMove = new EnemyMove();
-        //enemyMove.start();
     }
 
     /**
