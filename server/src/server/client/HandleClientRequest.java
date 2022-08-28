@@ -158,8 +158,6 @@ public class HandleClientRequest extends Thread{
             } catch (Exception ex) {
                 ex.printStackTrace();
                 System.out.println("Player has disconnected.");
-                //ClientSession.getInstance().logoutAll();     
-                //SocketCommunication.getInstance().stopServer();
                 DBBConnectionFactory.getInstance().closeConnection();   
             }
         }

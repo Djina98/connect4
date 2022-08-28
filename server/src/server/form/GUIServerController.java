@@ -36,7 +36,7 @@ public class GUIServerController {
 
                         this.fxmlServerController.lblStatus.setText("Server is listening on port " + Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)));
                         this.fxmlServerController.lblStatus.setTextFill(Color.color(0, 1, 0));
-                        this.fxmlServerController.btnStartServer.setDisable(false);
+                        this.fxmlServerController.btnStartServer.setDisable(true);
                     } catch (IOException ex) {
                         showAlert("Port" + PropertiesLoader.getInstance().getProperty(Constants.PORT) + " is already taken.");
                     } 

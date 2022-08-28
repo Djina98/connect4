@@ -9,11 +9,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import server.client.HandleClientRequest;
-import server.settings.Constants;
-import server.settings.PropertiesLoader;
 
 /**
  *
@@ -42,22 +38,9 @@ public class Server extends Thread{
         serverSocket = new ServerSocket(port);
         this.players = new ArrayList<>();
     }
-    
-    /*public static Server getInstance() {
-        if (instance == null) {
-            try {
-                instance = new Server(Integer.parseInt(PropertiesLoader.getInstance().getProperty(Constants.PORT)));
-            } catch (IOException ex) {
-                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return instance;
-    }*/
-    
+     
     @Override
     public void run() {
-        //System.out.println("###### GAME SERVER ######");
-        //System.out.println("Waiting for connections...");
         try {
             while (!isInterrupted()) {   
                 Socket socket = serverSocket.accept();
