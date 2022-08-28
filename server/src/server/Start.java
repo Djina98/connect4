@@ -21,7 +21,7 @@ import server.settings.PropertiesLoader;
  *
  * @author Djina
  */
-public class Server extends Application{
+public class Start extends Application{
  
     @Override
     public void start(Stage stage) {
@@ -32,8 +32,6 @@ public class Server extends Application{
     }
 
     public static void main(String[] args) throws IOException, SQLException {
-//        Server server = Server.getInstance();
-//        server.start();
         launch(args);
     }
     

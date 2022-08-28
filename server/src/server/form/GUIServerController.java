@@ -8,7 +8,6 @@ package server.form;
 import java.io.IOException;
 import javafx.scene.control.Alert;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 import server.settings.Constants;
 import server.settings.PropertiesLoader;
 import server.start.Server;

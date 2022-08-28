@@ -6,7 +6,6 @@
 package server.repository;
 
 import java.sql.SQLException;
-import java.util.Optional;
 import common.domain.GenericEntity;
 
 /**
