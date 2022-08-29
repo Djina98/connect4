@@ -40,13 +40,13 @@ public class GUISignupController {
                 Session.getInstance().setPlayer(player);
                 GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml");
                 
-            } catch (RuntimeException e) {
-                e.getStackTrace();
-                showMessage("Server is not active!");
+            } catch (RuntimeException re) {
+                re.getStackTrace();
+                showMessage(re.getMessage());
             } catch (Exception ex) {
                 ex.getStackTrace();
-                this.fxmlSignupController.lblInfo.setText(ex.getMessage());
-            }    
+                fxmlSignupController.lblInfo.setText(ex.getMessage());
+            }   
         }     
     }    
 

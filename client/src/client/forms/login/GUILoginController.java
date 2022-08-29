@@ -9,6 +9,8 @@ import client.communication.Controller;
 import client.main.GameStage;
 import client.session.Session;
 import common.domain.Player;
+import java.net.ConnectException;
+import java.net.SocketException;
 import javafx.scene.control.Alert;
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -37,10 +39,10 @@ public class GUILoginController {
                 Player player = Controller.getInstance().login(nickname, password);
                 Session.getInstance().setPlayer(player);
                 GameStage.getInstance().setScene("client/forms/main/FXMLMain.fxml");
-                
-            } catch (RuntimeException e) {
-                e.getStackTrace();
-                showMessage("Server is not active!");
+                 
+            } catch (RuntimeException re) {
+                re.getStackTrace();
+                showMessage(re.getMessage());
             } catch (Exception ex) {
                 ex.getStackTrace();
                 fxmlLoginController.lblInfo.setText(ex.getMessage());
